@@ -1,0 +1,39 @@
+docker build -t simulador-mic1 .
+
+*Se der certo, ele vai baixar o Java 21 e terminar com "Successfully tagged simulador-mic1".*
+
+---
+
+### 3. Rodando com Interface Gráfica (O Grande Desafio)
+
+Aqui está o "pulo do gato". O Docker roda Linux sem monitor. Para ele mostrar a janela do seu simulador no Windows, você precisa de um servidor de janelas (X Server).
+
+**Opção A: Apenas gerar para entregar (Sem testar visualmente no Docker)**
+Se você só precisa entregar os arquivos corretos para o professor (que provavelmente tem Linux ou sabe rodar), o `Dockerfile` acima já está pronto e correto. O erro de versão está resolvido dentro dele.
+
+**Opção B: Testar visualmente no seu Windows (Requer configuração extra)**
+Para ver a janela abrindo através do Docker no Windows:
+
+1.  Baixe e instale o **VcXsrv** (Windows X Server).
+2.  Abra o **XLaunch** (vem com o VcXsrv).
+3.  Vá clicando em avançar, mas na tela "Extra Settings", marque **"Disable access control"** (Importante!).
+4.  Termine e deixe ele rodando (ícone X na barra de tarefas).
+5.  Descubra seu IP local (abra outro CMD, digite `ipconfig` e pegue o IPv4, ex: `192.168.1.5`).
+6.  Rode o Docker conectando a tela dele na sua:
+
+```bash
+docker run --rm -e DISPLAY=192.168.1.5:0.0 simulador-mic1
+*(Substitua `192.168.1.5` pelo seu IP)*.
+
+Se tudo der certo, a janela do seu simulador (rodando Java 21 dentro do container) vai aparecer na sua área de trabalho!
+
+### Resumo para a Entrega
+
+Você não precisa mudar o código. O erro que deu no seu CMD (`UnsupportedClassVersionError`) **não vai acontecer no computador do professor** se ele rodar pelo Docker, porque o `Dockerfile` agora garante o uso do Java 21.
+
+Envie no GitHub:
+1.  O `Dockerfile` atualizado (acima).
+2.  O `SimuladorMIC1.jar` (exportado normalmente pelo Eclipse).
+3.  A pasta `dataFiles`.
+
+Isso cumpre o requisito.

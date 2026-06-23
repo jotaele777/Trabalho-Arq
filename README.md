@@ -57,8 +57,12 @@ HALT
 
  Autores:
  
-Andrei da Hora Torres de Carvalho
+Pedro Rangel
 
 João Lucas Pontes da Silva
 
-João Ferreira Lemos
+Rafael Gusmão
+
+Rafael Portela
+
+Iuri Frazão
